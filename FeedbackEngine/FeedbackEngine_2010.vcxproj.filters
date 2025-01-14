@@ -23,9 +23,18 @@
     <ClInclude Include="Include\Prerequisites.h">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="Include\BaseApp.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FeedbackEngine.cpp" />
+    <ClCompile Include="Source\BaseApp.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="FeedbackEngine.fx">
@@ -33,9 +42,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <CLInclude Include="resource.h">
-      <Filter>Resource Files</Filter>
-    </CLInclude>
     <ResourceCompile Include="FeedbackEngine.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>

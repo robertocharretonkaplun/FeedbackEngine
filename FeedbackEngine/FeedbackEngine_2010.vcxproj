@@ -418,13 +418,15 @@
   <ItemGroup />
   <ItemGroup>
     <ClCompile Include="FeedbackEngine.cpp" />
+    <ClCompile Include="Source\BaseApp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FeedbackEngine.fx" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Include\BaseApp.h" />
     <ClInclude Include="Include\Prerequisites.h" />
-    <CLInclude Include="resource.h" />
+    <ClInclude Include="Resource.h" />
     <ResourceCompile Include="FeedbackEngine.rc" />
   </ItemGroup>
   <ItemGroup>
