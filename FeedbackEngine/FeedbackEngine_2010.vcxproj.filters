@@ -29,10 +29,14 @@
     <ClInclude Include="Resource.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FeedbackEngine.cpp" />
     <ClCompile Include="Source\BaseApp.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Window.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
