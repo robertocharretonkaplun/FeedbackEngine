@@ -23,5 +23,31 @@ BaseApp::run(HINSTANCE hInstance,
 						 LPWSTR lpCmdLine, 
 						 int nCmdShow, 
 						 WNDPROC wndproc) {
-	return 0;
+	UNREFERENCED_PARAMETER(hPrevInstance);
+	UNREFERENCED_PARAMETER(lpCmdLine);
+
+	//if (m_window.init(hInstance, nCmdShow, WndProc))
+	//	return 0;
+
+	if (FAILED(init())) {
+		destroy();
+		return 0;
+	}
+
+	// Main message loop
+	MSG msg = { 0 };
+	while (WM_QUIT != msg.message) {
+		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+		else {
+			update();
+			render();
+		}
+	}
+
+	destroy();
+
+	return (int)msg.wParam;
 }

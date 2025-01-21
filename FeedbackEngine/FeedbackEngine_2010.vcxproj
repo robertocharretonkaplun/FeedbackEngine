@@ -419,6 +419,7 @@
   <ItemGroup>
     <ClCompile Include="FeedbackEngine.cpp" />
     <ClCompile Include="Source\BaseApp.cpp" />
+    <ClCompile Include="Source\Device.cpp" />
     <ClCompile Include="Source\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -426,7 +427,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\BaseApp.h" />
+    <ClInclude Include="Include\Device.h" />
     <ClInclude Include="Include\Prerequisites.h" />
+    <ClInclude Include="Include\Swapchain.h" />
     <ClInclude Include="Include\Window.h" />
     <ClInclude Include="Resource.h" />
     <ResourceCompile Include="FeedbackEngine.rc" />

@@ -25,12 +25,16 @@
    OutputDebugStringW( os_.str().c_str() );  \
 }
 
-#define ERROR( classObj, method, errorMSG )  \
-{                                            \
-   std::wostringstream os_;                  \
-   os_ << "ERROR : " << classObj << "::" << method << " : " << "  Error in data from params [" << errorMSG << "] \n"; \
-   OutputDebugStringW( os_.str().c_str() );  \
-   exit(1);                                  \
+#define ERROR(classObj, method, errorMSG)                     \
+{                                                             \
+    try {                                                     \
+        std::wostringstream os_;                              \
+        os_ << L"ERROR : " << classObj << L"::" << method     \
+            << L" : " << errorMSG << L"\n";                   \
+        OutputDebugStringW(os_.str().c_str());                \
+    } catch (...) {                                           \
+        OutputDebugStringW(L"Failed to log error message.\n");\
+    }                                                         \
 }
 
 // Structures

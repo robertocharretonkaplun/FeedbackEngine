@@ -1,5 +1,6 @@
 #pragma once
 #include "Prerequisites.h"
+#include "Window.h"
 
 class 
 BaseApp {
@@ -27,5 +28,5 @@ public:
 			WNDPROC wndproc);
 
 private:
-
+	Window m_window;
 };
