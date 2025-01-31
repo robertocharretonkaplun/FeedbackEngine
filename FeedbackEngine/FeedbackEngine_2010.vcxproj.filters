@@ -39,6 +39,12 @@
     <ClInclude Include="Include\DeviceContext.h">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Texture.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\stb_image.h">
+      <Filter>Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FeedbackEngine.cpp" />
@@ -52,6 +58,9 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\DeviceContext.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Texture.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>

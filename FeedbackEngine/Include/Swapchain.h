@@ -13,7 +13,7 @@ public:
 	Swapchain()  = default;
 	~Swapchain() = default;
 
-	void
+  HRESULT
   init(Device & device, 
        DeviceContext & deviceContext, 
        Texture & backBuffer, 

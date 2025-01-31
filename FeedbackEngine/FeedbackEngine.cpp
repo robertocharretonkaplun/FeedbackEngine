@@ -3,15 +3,12 @@
 #include "Device.h"
 #include "DeviceContext.h"
 // Global Variables
-//HINSTANCE                           g_hInst = nullptr;
-//HWND                                g_hWnd = nullptr;
 Window															g_window;
 Device															g_device;
 DeviceContext												g_deviceContext;
+
 D3D_DRIVER_TYPE                     g_driverType = D3D_DRIVER_TYPE_NULL;
 D3D_FEATURE_LEVEL                   g_featureLevel = D3D_FEATURE_LEVEL_11_0;
-//ID3D11Device*												g_pd3dDevice = nullptr;
-//ID3D11DeviceContext*								g_pImmediateContext = nullptr;
 IDXGISwapChain*											g_pSwapChain = nullptr;
 ID3D11RenderTargetView*							g_pRenderTargetView = nullptr;
 ID3D11Texture2D*										g_pDepthStencil = nullptr;
