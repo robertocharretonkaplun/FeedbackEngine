@@ -8,10 +8,10 @@ class Window;
 class Texture;
 
 class 
-Swapchain {
+SwapChain {
 public:
-	Swapchain()  = default;
-	~Swapchain() = default;
+	SwapChain()  = default;
+	~SwapChain() = default;
 
   HRESULT
   init(Device & device, 

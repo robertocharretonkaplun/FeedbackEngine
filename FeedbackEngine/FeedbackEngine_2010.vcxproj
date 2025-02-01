@@ -421,6 +421,7 @@
     <ClCompile Include="Source\BaseApp.cpp" />
     <ClCompile Include="Source\Device.cpp" />
     <ClCompile Include="Source\DeviceContext.cpp" />
+    <ClCompile Include="Source\Swapchain.cpp" />
     <ClCompile Include="Source\Texture.cpp" />
     <ClCompile Include="Source\Window.cpp" />
   </ItemGroup>
