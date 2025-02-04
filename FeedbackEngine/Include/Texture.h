@@ -7,6 +7,7 @@ class DeviceContext;
 
 class 
 Texture {
+public:
 	Texture() = default;
 	~Texture() = default;
 
