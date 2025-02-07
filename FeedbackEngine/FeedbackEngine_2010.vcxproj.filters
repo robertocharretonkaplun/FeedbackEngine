@@ -45,6 +45,12 @@
     <ClInclude Include="Include\stb_image.h">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="Include\RenderTargetView.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\DepthStencilView.h">
+      <Filter>Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FeedbackEngine.cpp" />
@@ -64,6 +70,12 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\Swapchain.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RenderTargetView.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DepthStencilView.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
