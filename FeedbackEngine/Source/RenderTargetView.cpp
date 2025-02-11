@@ -18,7 +18,8 @@ RenderTargetView::init(Device& device, Texture &backBuffer, DXGI_FORMAT Format) 
   HRESULT hr = S_OK;
 
   // Configurar la descripción de la vista del render target
-  D3D11_RENDER_TARGET_VIEW_DESC desc = {};
+  D3D11_RENDER_TARGET_VIEW_DESC desc;
+  memset(&desc, 0, sizeof(desc));
   desc.Format = Format;
   desc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2DMS;
 

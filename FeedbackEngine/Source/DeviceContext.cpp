@@ -1,5 +1,10 @@
 #include "DeviceContext.h"
 
+void 
+DeviceContext::destroy() {
+	SAFE_RELEASE(m_deviceContext);
+}
+
 void
 DeviceContext::RSSetViewports(unsigned int NumViewports,
 															const D3D11_VIEWPORT* pViewports) {

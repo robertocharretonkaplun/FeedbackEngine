@@ -375,9 +375,8 @@ CleanupDevice() {
 	g_depthStencilView.destroy();
 	g_renderTargetView.destroy();
 	g_swapchain.destroy();
-
-	if (g_deviceContext.m_deviceContext) g_deviceContext.m_deviceContext->Release();
-	if (g_device.m_device) g_device.m_device->Release();
+	g_deviceContext.destroy();
+	g_device.destroy();
 }
 
 
@@ -456,7 +455,7 @@ WndProc(HWND hWnd, unsigned int message, WPARAM wParam, LPARAM lParam) {
 				return hr;
 			}
 			// Actualizar el viewport
-			D3D11_VIEWPORT vp;
+			//D3D11_VIEWPORT vp;
 			vp.Width = static_cast<float>(g_window.m_width);
 			vp.Height = static_cast<float>(g_window.m_height);
 			vp.MinDepth = 0.0f;
@@ -534,25 +533,16 @@ void update() {
 void Render() {
 	// Limpiar los buffers
 	const float ClearColor[4] = { 0.0f, 0.125f, 0.3f, 1.0f }; // red, green, blue, alpha
+
+	// Set Render Target View
 	g_renderTargetView.render(g_deviceContext, g_depthStencilView, 1, ClearColor);
-	//g_deviceContext.ClearRenderTargetView(g_pRenderTargetView, ClearColor);
-	// Configurar los recursos de renderizado
-	//g_deviceContext.OMSetRenderTargets(1, &g_pRenderTargetView, g_pDepthStencilView);
 
-
-	// Configurar el viewport
-	//D3D11_VIEWPORT vp;
-	vp.Width = (float)g_window.m_width;
-	vp.Height = (float)g_window.m_height;
-	vp.MinDepth = 0.0f;
-	vp.MaxDepth = 1.0f;
-	vp.TopLeftX = 0;
-	vp.TopLeftY = 0;
+	// Set Viewport
 	g_deviceContext.RSSetViewports(1, &vp);
 
+	// Set Depth Stencil View
 	g_depthStencilView.render(g_deviceContext);
-	//g_deviceContext.ClearDepthStencilView(g_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
-
+	
 	// Configurar los buffers y shaders para el pipeline
 	g_deviceContext.IASetInputLayout(g_pVertexLayout);
 	g_deviceContext.IASetVertexBuffers(0, 1, &g_pVertexBuffer, &stride, &offset);
