@@ -51,6 +51,12 @@
     <ClInclude Include="Include\DepthStencilView.h">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Viewport.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\InputLayout.h">
+      <Filter>Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FeedbackEngine.cpp" />
@@ -76,6 +82,12 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\DepthStencilView.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Viewport.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\InputLayout.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
