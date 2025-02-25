@@ -419,6 +419,7 @@
   <ItemGroup>
     <ClCompile Include="FeedbackEngine.cpp" />
     <ClCompile Include="Source\BaseApp.cpp" />
+    <ClCompile Include="Source\Buffer.cpp" />
     <ClCompile Include="Source\DepthStencilView.cpp" />
     <ClCompile Include="Source\Device.cpp" />
     <ClCompile Include="Source\DeviceContext.cpp" />
@@ -435,10 +436,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\BaseApp.h" />
+    <ClInclude Include="Include\Buffer.h" />
     <ClInclude Include="Include\DepthStencilView.h" />
     <ClInclude Include="Include\Device.h" />
     <ClInclude Include="Include\DeviceContext.h" />
     <ClInclude Include="Include\InputLayout.h" />
+    <ClInclude Include="Include\MeshComponent.h" />
     <ClInclude Include="Include\Prerequisites.h" />
     <ClInclude Include="Include\RenderTargetView.h" />
     <ClInclude Include="Include\ShaderProgram.h" />

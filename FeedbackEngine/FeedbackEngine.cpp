@@ -7,8 +7,8 @@
 #include "RenderTargetView.h"
 #include "DepthStencilView.h"
 #include "Viewport.h"
-//#include "InputLayout.h"
 #include "ShaderProgram.h"
+
 // Global Variables
 Window															g_window;
 Device															g_device;
@@ -19,12 +19,8 @@ Texture															g_depthStencil;
 RenderTargetView										g_renderTargetView;
 DepthStencilView										g_depthStencilView;
 Viewport														g_viewport;
-//InputLayout													g_inputLayout;
 ShaderProgram												g_shaderProgram;
 
-//ID3D11VertexShader*									g_pVertexShader = nullptr;
-//ID3D11PixelShader*									g_pPixelShader = nullptr;
-//ID3D11InputLayout*									g_pVertexLayout = nullptr;
 ID3D11Buffer*												g_pVertexBuffer = nullptr;
 ID3D11Buffer*												g_pIndexBuffer = nullptr;
 ID3D11Buffer*												g_pCBNeverChanges = nullptr;
@@ -159,7 +155,7 @@ InitDevice() {
 	texcoord.InstanceDataStepRate = 0;
 	Layout.push_back(texcoord);
 
-	//// Create the Shader Program
+	// Create the Shader Program
 	hr = g_shaderProgram.init(g_device, "FeedbackEngine.fx", Layout);
 
 	if (FAILED(hr))
@@ -212,10 +208,6 @@ InitDevice() {
 	if (FAILED(hr))
 		return hr;
 
-	// Set vertex buffer
-	
-
-	// Create index buffer
 	// Create vertex buffer
 	WORD 
 	indices[] = {
@@ -246,11 +238,6 @@ InitDevice() {
 	hr = g_device.CreateBuffer(&bd, &InitData, &g_pIndexBuffer);
 	if (FAILED(hr))
 		return hr;
-
-	// Set index buffer
-
-	// Set primitive topology
-	
 
 	// Create the constant buffers
 	bd.Usage = D3D11_USAGE_DEFAULT;
