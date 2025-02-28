@@ -27,11 +27,16 @@ Buffer::init(Device& device, const MeshComponent& mesh, unsigned int bindFlag) {
     return E_POINTER;
   }
 
-  if ((bindFlag == D3D11_BIND_VERTEX_BUFFER && mesh.m_vertex.empty()) ||
-    (bindFlag == D3D11_BIND_INDEX_BUFFER && mesh.m_index.empty())) {
-    ERROR("Buffer", "init", "Mesh data is empty");
+  if((bindFlag & D3D11_BIND_VERTEX_BUFFER) && mesh.m_vertex.empty()) {
+    ERROR("Buffer", "init", "Vertex buffer is empty");
     return E_INVALIDARG;
   }
+
+  if ((bindFlag & D3D11_BIND_INDEX_BUFFER) && mesh.m_index.empty()) {
+    ERROR("Buffer", "init", "Index buffer is empty");
+    return E_INVALIDARG;
+  }
+
 
   D3D11_BUFFER_DESC desc = {};
   D3D11_SUBRESOURCE_DATA InitData = {};
@@ -40,13 +45,13 @@ Buffer::init(Device& device, const MeshComponent& mesh, unsigned int bindFlag) {
   desc.CPUAccessFlags = 0;
   m_bindFlag = bindFlag;
 
-  if (bindFlag == D3D11_BIND_VERTEX_BUFFER) {
+  if (bindFlag & D3D11_BIND_VERTEX_BUFFER) {
     m_stride = sizeof(SimpleVertex);
     desc.ByteWidth = m_stride * static_cast<unsigned int>(mesh.m_vertex.size());
     desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
     InitData.pSysMem = mesh.m_vertex.data();
   }
-  else if (bindFlag == D3D11_BIND_INDEX_BUFFER) {
+  else if (bindFlag & D3D11_BIND_INDEX_BUFFER) {
     m_stride = sizeof(unsigned int);
     desc.ByteWidth = m_stride * static_cast<unsigned int>(mesh.m_index.size());
     desc.BindFlags = D3D11_BIND_INDEX_BUFFER;
@@ -93,8 +98,8 @@ Buffer::update(DeviceContext& deviceContext,
 void Buffer::render(DeviceContext& deviceContext,
                     unsigned int StartSlot,
                     unsigned int NumBuffers,
-                    DXGI_FORMAT format = DXGI_FORMAT_UNKNOWN,
-                    bool setPixelShader = false) {
+                    bool setPixelShader,
+                    DXGI_FORMAT format) {
   if (!m_buffer) {
     ERROR("Buffer", "render", "Buffer is nullptr");
     return;
