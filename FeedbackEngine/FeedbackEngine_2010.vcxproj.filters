@@ -66,6 +66,9 @@
     <ClInclude Include="Include\MeshComponent.h">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="Include\SamplerState.h">
+      <Filter>Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FeedbackEngine.cpp" />
@@ -103,6 +106,9 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\Buffer.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SamplerState.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>

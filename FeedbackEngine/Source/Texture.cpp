@@ -170,6 +170,10 @@ void Texture::render(DeviceContext& deviceContext, unsigned int StartSlot, unsig
 }
 
 void Texture::destroy() {
-  SAFE_RELEASE(m_texture);
-  SAFE_RELEASE(m_textureFromImg);
+  if (m_texture != nullptr) {
+    SAFE_RELEASE(m_texture);
+  }
+  else  if (m_textureFromImg != nullptr) {
+    SAFE_RELEASE(m_textureFromImg);
+  }
 }
