@@ -60,10 +60,14 @@ public:
 	Texture															m_textureCubeImg;
 	SamplerState												m_samplerState;
 
-	XMMATRIX                            m_World;
+	XMMATRIX                            m_modelMatrix;
 	XMMATRIX                            m_View;
 	XMMATRIX                            m_Projection;
 	XMFLOAT4                            m_vMeshColor;
+
+	XMFLOAT3 position;  // Posición del objeto
+	XMFLOAT3 rotation;  // Rotación del objeto
+	XMFLOAT3 scale;     // Escala del objeto
 
 	MeshComponent m_meshComponent;
 

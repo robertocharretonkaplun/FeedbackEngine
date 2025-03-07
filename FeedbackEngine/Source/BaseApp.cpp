@@ -176,7 +176,11 @@ BaseApp::init() {
 		return hr;
 
 	// Initialize the world matrices
-	m_World = XMMatrixIdentity();
+	scale.x = 1;
+	scale.y = 1;
+	scale.z = 1;
+
+	m_modelMatrix = XMMatrixIdentity();
 
 	// Initialize the view matrix
 	XMVECTOR Eye = XMVectorSet(0.0f, 3.0f, -6.0f, 0.0f);
@@ -201,18 +205,23 @@ BaseApp::update() {
 			dwTimeStart = dwTimeCur;
 		t = (dwTimeCur - dwTimeStart) / 1000.0f;
 	}
-
+	rotation.y = t;
 	// Actualizar la rotación del objeto y el color
-	m_World = XMMatrixRotationY(t);
+	XMMATRIX scaleMatrix = XMMatrixScaling(scale.x, scale.y , scale.z );
+	XMMATRIX rotationMatrix = XMMatrixRotationRollPitchYaw(rotation.x, rotation.y, rotation.z);
+	XMMATRIX traslationMatrix = XMMatrixTranslation(position.x, position.y, position.z);
+
+	// Componer la matriz final en el orden: scale -> rotation -> translation
+	m_modelMatrix = scaleMatrix * rotationMatrix * traslationMatrix;
+	// Actualizar el buffer constante del frame
+	cb.mWorld = XMMatrixTranspose(m_modelMatrix);
+
 	m_vMeshColor = XMFLOAT4(
 		(sinf(t * 1.0f) + 1.0f) * 0.5f,
 		(cosf(t * 3.0f) + 1.0f) * 0.5f,
 		(sinf(t * 5.0f) + 1.0f) * 0.5f,
 		1.0f
 	);
-
-	// Actualizar el buffer constante del frame
-	cb.mWorld = XMMatrixTranspose(m_World);
 	cb.vMeshColor = m_vMeshColor;
 	m_changeEveryFrame.update(m_deviceContext, 0, nullptr, &cb, 0, 0);
 
@@ -331,7 +340,7 @@ BaseApp::resizeWindow(HWND hWnd, LPARAM lParam) {
 			return hr;
 		}
 
-		// **5. RECREAR EL DEPTH STENCIL VIEW**
+		// **5. RECREAR EL DEPTH STENCIL**
 		hr = m_depthStencil.init(m_device,
 			m_window.m_width,
 			m_window.m_height,
@@ -343,6 +352,8 @@ BaseApp::resizeWindow(HWND hWnd, LPARAM lParam) {
 			ERROR("DepthStencil", "Resize", "Failed to create new DepthStencil");
 			return hr;
 		}
+
+		// **6. RECREAR EL DEPTH STENCIL VIEW**
 
 		hr = m_depthStencilView.init(m_device,
 			m_depthStencil,
@@ -362,10 +373,8 @@ BaseApp::resizeWindow(HWND hWnd, LPARAM lParam) {
 
 		// Actualizar la proyección
 		m_Projection = XMMatrixPerspectiveFovLH(XM_PIDIV4, m_window.m_width / (float)m_window.m_height, 0.01f, 100.0f);
-		CBChangeOnResize cbChangesOnResize;
 		cbChangesOnResize.mProjection = XMMatrixTranspose(m_Projection);
 		m_changeOnResize.update(m_deviceContext, 0, nullptr, &cbChangesOnResize, 0, 0);
-		//m_deviceContext.UpdateSubresource(m_pCBChangeOnResize, 0, nullptr, &cbChangesOnResize, 0, 0);
 	}
 }
 
