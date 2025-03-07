@@ -205,6 +205,9 @@ BaseApp::update() {
 			dwTimeStart = dwTimeCur;
 		t = (dwTimeCur - dwTimeStart) / 1000.0f;
 	}
+
+	updateTranslationByKey(t);
+
 	rotation.y = t;
 	// Actualizar la rotación del objeto y el color
 	XMMATRIX scaleMatrix = XMMatrixScaling(scale.x, scale.y , scale.z );
@@ -376,6 +379,26 @@ BaseApp::resizeWindow(HWND hWnd, LPARAM lParam) {
 		cbChangesOnResize.mProjection = XMMatrixTranspose(m_Projection);
 		m_changeOnResize.update(m_deviceContext, 0, nullptr, &cbChangesOnResize, 0, 0);
 	}
+}
+
+void 
+BaseApp::updateTranslationByKey(float deltaTime) {
+	float moveSpeed = 521.0f; // Velocidad de movimiento
+
+	//switch (key) {
+	//case VK_UP:    position.y += moveSpeed; break;  // Mover arriba
+	//case VK_DOWN:  position.y -= moveSpeed; break;  // Mover abajo
+	//case VK_LEFT:  position.x -= moveSpeed; break;  // Mover izquierda
+	//case VK_RIGHT: position.x += moveSpeed; break;  // Mover derecha
+	//case 'W':      position.z += moveSpeed; break;  // Avanzar en Z
+	//case 'S':      position.z -= moveSpeed; break;  // Retroceder en Z
+	//}
+	if (keys[VK_UP])    position.y += moveSpeed * deltaTime; // Mueve arriba
+	if (keys[VK_DOWN])  position.y -= moveSpeed * deltaTime; // Mueve abajo
+	if (keys[VK_LEFT])  position.x -= moveSpeed * deltaTime; // Mueve izquierda
+	if (keys[VK_RIGHT]) position.x += moveSpeed * deltaTime; // Mueve derecha
+	if (keys['W'])      position.z += moveSpeed * deltaTime; // Avanza en Z
+	if (keys['S'])      position.z -= moveSpeed * deltaTime; // Retrocede en Z
 }
 
 int 

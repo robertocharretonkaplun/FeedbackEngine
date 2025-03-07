@@ -34,6 +34,9 @@ public:
 	HRESULT
 	resizeWindow(HWND hWnd, LPARAM lParam);
 
+	void 
+	updateTranslationByKey(float deltaTime);
+
 	int 
 	run(HINSTANCE hInstance, 
 			HINSTANCE hPrevInstance, 
@@ -74,4 +77,7 @@ public:
 	CBChangesEveryFrame cb;
 	CBNeverChanges cbNeverChanges;
 	CBChangeOnResize cbChangesOnResize;
+
+	bool keys[256] = { false };
+
 };
