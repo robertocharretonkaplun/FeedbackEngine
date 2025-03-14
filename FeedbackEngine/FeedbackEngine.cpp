@@ -5,8 +5,10 @@
 BaseApp app;
 
 // Called every time the application receives a message
-extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-LRESULT CALLBACK WndProc(HWND hWnd, unsigned int message, WPARAM wParam, LPARAM lParam) {
+extern IMGUI_IMPL_API 
+LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK 
+WndProc(HWND hWnd, unsigned int message, WPARAM wParam, LPARAM lParam) {
 	if (ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam))
 		return true;
 	PAINTSTRUCT ps;
@@ -20,7 +22,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, unsigned int message, WPARAM wParam, LPARAM 
 
 	case WM_SIZE:
 		app.resizeWindow(hWnd, lParam);
-		
+
 		break;
 
 	case WM_DESTROY:
