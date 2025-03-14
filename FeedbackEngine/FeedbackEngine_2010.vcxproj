@@ -161,7 +161,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalIncludeDirectories>./include/;DXUT\Core;DXUT\Optional;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include/;DXUT\Core;DXUT\Optional;C:\Users\rchar\OneDrive\Documentos\GitHub\FeedbackEngine\FeedbackEngine\Imgui\imgui-docking-znly-docking\backends;C:\Users\rchar\OneDrive\Documentos\GitHub\FeedbackEngine\FeedbackEngine\Imgui\imgui-docking-znly-docking;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>WIN32;_DEBUG;DEBUG;PROFILE;_WINDOWS;D3DXFX_LARGEADDRESS_HANDLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
@@ -204,7 +204,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FloatingPointModel>Fast</FloatingPointModel>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalIncludeDirectories>./include/;DXUT\Core;DXUT\Optional;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include/;DXUT\Core;DXUT\Optional;C:\Users\rchar\OneDrive\Documentos\GitHub\FeedbackEngine\FeedbackEngine\Imgui\imgui-docking-znly-docking\backends;C:\Users\rchar\OneDrive\Documentos\GitHub\FeedbackEngine\FeedbackEngine\Imgui\imgui-docking-znly-docking;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>WIN32;_DEBUG;DEBUG;PROFILE;_WINDOWS;D3DXFX_LARGEADDRESS_HANDLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -248,7 +248,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalIncludeDirectories>./include/;DXUT\Core;DXUT\Optional;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include/;DXUT\Core;DXUT\Optional;C:\Users\rchar\OneDrive\Documentos\GitHub\FeedbackEngine\FeedbackEngine\Imgui\imgui-docking-znly-docking\backends;C:\Users\rchar\OneDrive\Documentos\GitHub\FeedbackEngine\FeedbackEngine\Imgui\imgui-docking-znly-docking;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;D3DXFX_LARGEADDRESS_HANDLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -292,7 +292,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FloatingPointModel>Fast</FloatingPointModel>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalIncludeDirectories>./include/;DXUT\Core;DXUT\Optional;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include/;DXUT\Core;DXUT\Optional;C:\Users\rchar\OneDrive\Documentos\GitHub\FeedbackEngine\FeedbackEngine\Imgui\imgui-docking-znly-docking\backends;C:\Users\rchar\OneDrive\Documentos\GitHub\FeedbackEngine\FeedbackEngine\Imgui\imgui-docking-znly-docking;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;D3DXFX_LARGEADDRESS_HANDLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -337,7 +337,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalIncludeDirectories>./include/;DXUT\Core;DXUT\Optional;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include/;DXUT\Core;DXUT\Optional;C:\Users\rchar\OneDrive\Documentos\GitHub\FeedbackEngine\FeedbackEngine\Imgui\imgui-docking-znly-docking\backends;C:\Users\rchar\OneDrive\Documentos\GitHub\FeedbackEngine\FeedbackEngine\Imgui\imgui-docking-znly-docking;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>WIN32;NDEBUG;PROFILE;_WINDOWS;D3DXFX_LARGEADDRESS_HANDLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -381,7 +381,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FloatingPointModel>Fast</FloatingPointModel>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalIncludeDirectories>./include/;DXUT\Core;DXUT\Optional;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include/;DXUT\Core;DXUT\Optional;C:\Users\rchar\OneDrive\Documentos\GitHub\FeedbackEngine\FeedbackEngine\Imgui\imgui-docking-znly-docking\backends;C:\Users\rchar\OneDrive\Documentos\GitHub\FeedbackEngine\FeedbackEngine\Imgui\imgui-docking-znly-docking;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>WIN32;NDEBUG;PROFILE;_WINDOWS;D3DXFX_LARGEADDRESS_HANDLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -418,6 +418,13 @@
   <ItemGroup />
   <ItemGroup>
     <ClCompile Include="FeedbackEngine.cpp" />
+    <ClCompile Include="Imgui\imgui-docking-znly-docking\backends\imgui_impl_dx11.cpp" />
+    <ClCompile Include="Imgui\imgui-docking-znly-docking\backends\imgui_impl_win32.cpp" />
+    <ClCompile Include="Imgui\imgui-docking-znly-docking\imgui.cpp" />
+    <ClCompile Include="Imgui\imgui-docking-znly-docking\imgui_demo.cpp" />
+    <ClCompile Include="Imgui\imgui-docking-znly-docking\imgui_draw.cpp" />
+    <ClCompile Include="Imgui\imgui-docking-znly-docking\imgui_tables.cpp" />
+    <ClCompile Include="Imgui\imgui-docking-znly-docking\imgui_widgets.cpp" />
     <ClCompile Include="Source\BaseApp.cpp" />
     <ClCompile Include="Source\Buffer.cpp" />
     <ClCompile Include="Source\DepthStencilView.cpp" />
@@ -426,9 +433,11 @@
     <ClCompile Include="Source\InputLayout.cpp" />
     <ClCompile Include="Source\RenderTargetView.cpp" />
     <ClCompile Include="Source\SamplerState.cpp" />
+    <ClCompile Include="Source\Screenshot.cpp" />
     <ClCompile Include="Source\ShaderProgram.cpp" />
     <ClCompile Include="Source\Swapchain.cpp" />
     <ClCompile Include="Source\Texture.cpp" />
+    <ClCompile Include="Source\UserInterface.cpp" />
     <ClCompile Include="Source\Viewport.cpp" />
     <ClCompile Include="Source\Window.cpp" />
   </ItemGroup>
@@ -436,6 +445,14 @@
     <None Include="FeedbackEngine.fx" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Imgui\imgui-docking-znly-docking\backends\imgui_impl_dx11.h" />
+    <ClInclude Include="Imgui\imgui-docking-znly-docking\backends\imgui_impl_win32.h" />
+    <ClInclude Include="Imgui\imgui-docking-znly-docking\imconfig.h" />
+    <ClInclude Include="Imgui\imgui-docking-znly-docking\imgui.h" />
+    <ClInclude Include="Imgui\imgui-docking-znly-docking\imgui_internal.h" />
+    <ClInclude Include="Imgui\imgui-docking-znly-docking\imstb_rectpack.h" />
+    <ClInclude Include="Imgui\imgui-docking-znly-docking\imstb_textedit.h" />
+    <ClInclude Include="Imgui\imgui-docking-znly-docking\imstb_truetype.h" />
     <ClInclude Include="Include\BaseApp.h" />
     <ClInclude Include="Include\Buffer.h" />
     <ClInclude Include="Include\DepthStencilView.h" />
@@ -446,10 +463,12 @@
     <ClInclude Include="Include\Prerequisites.h" />
     <ClInclude Include="Include\RenderTargetView.h" />
     <ClInclude Include="Include\SamplerState.h" />
+    <ClInclude Include="Include\Screenshot.h" />
     <ClInclude Include="Include\ShaderProgram.h" />
     <ClInclude Include="Include\stb_image.h" />
     <ClInclude Include="Include\Swapchain.h" />
     <ClInclude Include="Include\Texture.h" />
+    <ClInclude Include="Include\UserInterface.h" />
     <ClInclude Include="Include\Viewport.h" />
     <ClInclude Include="Include\Window.h" />
     <ClInclude Include="Resource.h" />

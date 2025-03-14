@@ -188,11 +188,19 @@ BaseApp::init() {
 	XMVECTOR Up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 	m_View = XMMatrixLookAtLH(Eye, At, Up);
 
+	// Initialize User Interface
+	m_userInterface.init(m_window.m_hWnd,
+		m_device.m_device,
+		m_deviceContext.m_deviceContext);
+
 	return S_OK;
 }
 
 void 
 BaseApp::update() {
+	m_userInterface.update();
+	bool show_demo_window = true;
+	ImGui::ShowDemoWindow(&show_demo_window);
 	// Actualizar tiempo y rotación
 	static float t = 0.0f;
 	if (m_swapchain.m_driverType == D3D_DRIVER_TYPE_REFERENCE) {
@@ -275,6 +283,9 @@ BaseApp::render() {
 	// Dibujar
 	m_deviceContext.DrawIndexed(m_meshComponent.m_index.size(), 0, 0);
 
+	// Presentar la interfaz de usuario
+	m_userInterface.render();
+
 	// Presentar el frame en pantalla
 	m_swapchain.present();
 }
@@ -298,6 +309,7 @@ BaseApp::destroy() {
 	m_renderTargetView.destroy();
 	m_swapchain.destroy();
 	m_deviceContext.destroy();
+	m_userInterface.destroy();
 	m_device.destroy();
 }
 

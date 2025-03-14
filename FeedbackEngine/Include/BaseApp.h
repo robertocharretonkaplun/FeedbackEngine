@@ -12,6 +12,7 @@
 #include "Buffer.h"
 #include "MeshComponent.h"
 #include "SamplerState.h"
+#include "UserInterface.h"
 
 class 
 BaseApp {
@@ -68,6 +69,8 @@ public:
 	Buffer															m_changeEveryFrame;
 	Texture															m_textureCubeImg;
 	SamplerState												m_samplerState;
+	UserInterface												m_userInterface;
+
 
 	XMMATRIX                            m_modelMatrix;
 	XMMATRIX                            m_View;
