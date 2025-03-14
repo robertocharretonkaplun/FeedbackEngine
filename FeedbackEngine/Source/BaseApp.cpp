@@ -229,12 +229,11 @@ BaseApp::update() {
 	m_changeEveryFrame.update(m_deviceContext, 0, nullptr, &cb, 0, 0);
 
 	// Actualizar la matriz de proyección
-	m_Projection = XMMatrixPerspectiveFovLH(XM_PIDIV4, m_window.m_width / (float)m_window.m_height, 0.01f, 100.0f);
+	// Matriz de proyección con FOV similar a Unreal (90°)
+	float FOV = XMConvertToRadians(90.0f);
+	m_Projection = XMMatrixPerspectiveFovLH(FOV, m_window.m_width / (float)m_window.m_height, 0.01f, 10000.0f);
 
-	// Actualizar la vista (si es necesario cambiar dinámicamente)
-	cbNeverChanges.mView = XMMatrixTranspose(m_View);
-	m_neverChanges.update(m_deviceContext, 0, nullptr, &cbNeverChanges, 0, 0);
-
+	updateCamera();
 	// Actualizar la proyección en el buffer constante
 	cbChangesOnResize.mProjection = XMMatrixTranspose(m_Projection);
 	m_changeOnResize.update(m_deviceContext, 0, nullptr, &cbChangesOnResize, 0, 0);
@@ -383,22 +382,70 @@ BaseApp::resizeWindow(HWND hWnd, LPARAM lParam) {
 
 void 
 BaseApp::updateTranslationByKey(float deltaTime) {
-	float moveSpeed = 521.0f; // Velocidad de movimiento
+	float moveSpeed = 0.001f; // Velocidad de movimiento
+	float moveSpeedCamera = 0.01f; // Velocidad de movimiento
 
-	//switch (key) {
-	//case VK_UP:    position.y += moveSpeed; break;  // Mover arriba
-	//case VK_DOWN:  position.y -= moveSpeed; break;  // Mover abajo
-	//case VK_LEFT:  position.x -= moveSpeed; break;  // Mover izquierda
-	//case VK_RIGHT: position.x += moveSpeed; break;  // Mover derecha
-	//case 'W':      position.z += moveSpeed; break;  // Avanzar en Z
-	//case 'S':      position.z -= moveSpeed; break;  // Retroceder en Z
-	//}
 	if (keys[VK_UP])    position.y += moveSpeed * deltaTime; // Mueve arriba
 	if (keys[VK_DOWN])  position.y -= moveSpeed * deltaTime; // Mueve abajo
 	if (keys[VK_LEFT])  position.x -= moveSpeed * deltaTime; // Mueve izquierda
 	if (keys[VK_RIGHT]) position.x += moveSpeed * deltaTime; // Mueve derecha
-	if (keys['W'])      position.z += moveSpeed * deltaTime; // Avanza en Z
-	if (keys['S'])      position.z -= moveSpeed * deltaTime; // Retrocede en Z
+	if (keys['E'])      position.z += moveSpeed * deltaTime; // Avanza en Z
+	if (keys['Q'])      position.z -= moveSpeed * deltaTime; // Retrocede en Z
+
+	XMVECTOR pos = XMLoadFloat3(&m_camera.position);
+	XMVECTOR forward = XMLoadFloat3(&m_camera.forward);
+	XMVECTOR right = XMLoadFloat3(&m_camera.right);
+
+	if (keys['W']) pos += forward * moveSpeedCamera;
+	if (keys['S']) pos -= forward * moveSpeedCamera;
+	if (keys['A']) pos -= right * moveSpeedCamera;
+	if (keys['D']) pos += right * moveSpeedCamera;
+
+	XMStoreFloat3(&m_camera.position, pos);
+
+}
+
+void 
+BaseApp::updateCamera() {
+	// Convertir la dirección a vectores normalizados
+	XMVECTOR pos = XMLoadFloat3(&m_camera.position);
+	XMVECTOR dir = XMLoadFloat3(&m_camera.forward);
+	XMVECTOR up = XMLoadFloat3(&m_camera.up);
+
+	// Calcular la nueva vista
+	m_View = XMMatrixLookAtLH(pos, pos + dir, up);
+
+	// Transponer y actualizar el buffer de la vista
+	cbNeverChanges.mView = XMMatrixTranspose(m_View);
+	m_neverChanges.update(m_deviceContext, 0, nullptr, &cbNeverChanges, 0, 0);
+}
+
+void 
+BaseApp::rotateCamera(int mouseX, int mouseY) {
+	float offsetX = (mouseX - lastX) * sensitivity;
+	float offsetY = (mouseY - lastY) * sensitivity;
+	lastX = mouseX;
+	lastY = mouseY;
+
+	m_camera.yaw += offsetX;
+	m_camera.pitch += offsetY;
+
+	// Limitar la inclinación de la cámara
+	if (m_camera.pitch > 1.5f) m_camera.pitch = 1.5f;
+	if (m_camera.pitch < -1.5f) m_camera.pitch = -1.5f;
+
+	// Recalcular la dirección hacia adelante
+	XMVECTOR forward = XMVectorSet(
+		cosf(m_camera.yaw) * cosf(m_camera.pitch),
+		sinf(m_camera.pitch),
+		sinf(m_camera.yaw) * cosf(m_camera.pitch),
+		0.0f
+	);
+
+	XMVECTOR right = XMVector3Cross(forward, XMLoadFloat3(&m_camera.up));
+
+	XMStoreFloat3(&m_camera.forward, XMVector3Normalize(forward));
+	XMStoreFloat3(&m_camera.right, XMVector3Normalize(right));
 }
 
 int 

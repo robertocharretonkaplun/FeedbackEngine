@@ -33,6 +33,22 @@ WndProc(HWND hWnd, unsigned int message, WPARAM wParam, LPARAM lParam) {
 		app.keys[wParam] = false;
 		break;
 
+	case WM_RBUTTONDOWN:
+		app.mouseLeftDown = true;
+		break;
+
+	case WM_RBUTTONUP:
+		app.mouseLeftDown = false;
+		break;
+
+	case WM_MOUSEMOVE:
+		if (app.mouseLeftDown) { // Solo rotar si el clic izquierdo está presionado
+			int x = LOWORD(lParam);
+			int y = HIWORD(lParam);
+			app.rotateCamera(x, y);
+		}
+		break;
+
 	default:
 		return DefWindowProc(hWnd, message, wParam, lParam);
 	}

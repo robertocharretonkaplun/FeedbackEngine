@@ -37,6 +37,12 @@ public:
 	void 
 	updateTranslationByKey(float deltaTime);
 
+	void 
+	updateCamera();
+	
+	void 
+	rotateCamera(int mouseX, int mouseY);
+
 	int 
 	run(HINSTANCE hInstance, 
 			HINSTANCE hPrevInstance, 
@@ -73,11 +79,16 @@ public:
 	XMFLOAT3 scale;     // Escala del objeto
 
 	MeshComponent m_meshComponent;
+	Camera m_camera;
 
 	CBChangesEveryFrame cb;
 	CBNeverChanges cbNeverChanges;
 	CBChangeOnResize cbChangesOnResize;
 
 	bool keys[256] = { false };
+	bool mouseLeftDown = false; // Estado del botón izquierdo
+	int lastX;
+	int lastY;  // Valores iniciales
+	float sensitivity = 0.002f;
 
 };
