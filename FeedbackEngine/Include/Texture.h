@@ -39,6 +39,9 @@ public:
        unsigned int sampleCount = 1,
        unsigned int qualityLevels = 0);
 
+  HRESULT 
+  init(Device& device, Texture& textureRef, DXGI_FORMAT format);
+
   /// <summary>
   /// Brief: This method is in charge of updating the logic of the texture
   /// </summary>

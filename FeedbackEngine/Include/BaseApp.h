@@ -71,6 +71,10 @@ public:
 	SamplerState												m_samplerState;
 	UserInterface												m_userInterface;
 
+	// Render Target IMGUI
+	Texture															m_imguiTexture;
+	RenderTargetView										m_imguiRenderTargetView;
+	Texture															m_imguiShaderResourceView;
 
 	XMMATRIX                            m_modelMatrix;
 	XMMATRIX                            m_View;

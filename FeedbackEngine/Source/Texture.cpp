@@ -155,6 +155,26 @@ HRESULT Texture::init(Device device,
   return hr;
 }
 
+HRESULT Texture::init(Device & device, Texture& textureRef, DXGI_FORMAT format)
+{
+  HRESULT hr = S_OK;
+
+  // Crear vista del recurso de la textura
+  D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
+  srvDesc.Format = format;
+  srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+  srvDesc.Texture2D.MipLevels = 1;
+  srvDesc.Texture2D.MostDetailedMip = 0;
+
+  hr = device.m_device->CreateShaderResourceView(textureRef.m_texture, &srvDesc, &m_textureFromImg);
+
+  if (FAILED(hr)) {
+    ERROR("Texture", "init", "Failed to create shader resource view for PNG texture");
+    return hr;
+  }
+  return hr;
+}
+
 void Texture::update() {
 }
 

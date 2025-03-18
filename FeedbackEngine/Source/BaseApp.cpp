@@ -169,6 +169,34 @@ BaseApp::init() {
 	if (FAILED(hr))
 		return hr;
 
+	hr = m_imguiTexture.init(m_device, 
+													 m_window.m_width,
+													 m_window.m_height,
+													 DXGI_FORMAT_R8G8B8A8_UNORM,
+													 D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE,
+													 1,
+													 0);
+
+	if (FAILED(hr)) {
+		return hr;
+	}
+	
+
+	// Crear una vista de render target para la textura de IMGUI
+	hr = m_imguiRenderTargetView.init(m_device,
+																		m_imguiTexture,
+																		D3D11_RTV_DIMENSION_TEXTURE2D, //D3D11_RTV_DIMENSION_TEXTURE2DMS
+																		DXGI_FORMAT_R8G8B8A8_UNORM);
+
+	if (FAILED(hr)) {
+		return hr;
+	}
+
+	hr = m_imguiShaderResourceView.init(m_device, m_imguiTexture, DXGI_FORMAT_R8G8B8A8_UNORM);
+	if (FAILED(hr)) {
+		return hr;
+	}
+
 	// Create the sample state
 	hr = m_samplerState.init(m_device);
 
@@ -252,6 +280,9 @@ BaseApp::render() {
 	// Limpiar los buffers
 	const float ClearColor[4] = { 0.0f, 0.125f, 0.3f, 1.0f }; // red, green, blue, alpha
 
+	// Configurar la textura IMGUI como la vista de renderizado
+	m_imguiRenderTargetView.render(m_deviceContext, 1);
+
 	// Set Render Target View
 	m_renderTargetView.render(m_deviceContext, m_depthStencilView, 1, ClearColor);
 
@@ -283,7 +314,21 @@ BaseApp::render() {
 	// Dibujar
 	m_deviceContext.DrawIndexed(m_meshComponent.m_index.size(), 0, 0);
 
-	// Presentar la interfaz de usuario
+	// Copiar el back buffer a la textura IMGUI
+	m_swapchain.m_swapchain->GetBuffer(0,
+		__uuidof(ID3D11Texture2D),
+		reinterpret_cast<void**>(&m_backBuffer.m_texture));
+
+	// Si el backbuffer es multisample, resolverlo a una textura sin MSAA (la usada por ImGui)
+	m_deviceContext.m_deviceContext->ResolveSubresource(
+		m_imguiTexture.m_texture,      // Destino: textura de ImGui
+		0,                             // Mip level
+		m_backBuffer.m_texture,        // Fuente: backbuffer
+		0,                             // Mip level fuente
+		DXGI_FORMAT_R8G8B8A8_UNORM);    // Formato
+
+	// Renderizar la interfaz de usuario y mostrar la imagen
+	m_userInterface.Renderer(m_window, m_imguiShaderResourceView.m_textureFromImg);
 	m_userInterface.render();
 
 	// Presentar el frame en pantalla
@@ -316,6 +361,13 @@ BaseApp::destroy() {
 HRESULT 
 BaseApp::resizeWindow(HWND hWnd, LPARAM lParam) {
 	if (m_swapchain.m_swapchain) {
+		unsigned int newWidth = LOWORD(lParam);
+		unsigned int newHeight = HIWORD(lParam);
+
+		if (newWidth == 0 || newHeight == 0) {
+			return S_OK;
+		}
+
 		m_window.m_width = LOWORD(lParam);
 		m_window.m_height = HIWORD(lParam);
 
@@ -324,14 +376,22 @@ BaseApp::resizeWindow(HWND hWnd, LPARAM lParam) {
 		m_depthStencilView.destroy();
 		m_depthStencil.destroy();
 		m_backBuffer.destroy();
+		m_imguiRenderTargetView.destroy();
+		m_imguiShaderResourceView.destroy();
+		m_imguiTexture.destroy();
 
 		// Redimensionar el swap chain
 		HRESULT hr = m_swapchain.m_swapchain->ResizeBuffers(0,
-			m_window.m_width,
-			m_window.m_height,
-			DXGI_FORMAT_R8G8B8A8_UNORM,
-			0);
+																												m_window.m_width,
+																												m_window.m_height,
+																												DXGI_FORMAT_R8G8B8A8_UNORM,
+																												0);
 		if (FAILED(hr)) {
+			// Si falla, puede ser útil obtener la razón del dispositivo removido, por ejemplo:
+			if (hr == DXGI_ERROR_DEVICE_REMOVED) {
+				HRESULT reason = m_device.m_device->GetDeviceRemovedReason();
+				// Puedes imprimir o loggear "reason" para depuración.
+			}
 			MessageBox(hWnd, "Failed to resize swap chain buffers.", "Error", MB_OK);
 			PostQuitMessage(0);
 		}
@@ -374,6 +434,38 @@ BaseApp::resizeWindow(HWND hWnd, LPARAM lParam) {
 			DXGI_FORMAT_D24_UNORM_S8_UINT);
 		if (FAILED(hr)) {
 			ERROR("DepthStencilView", "Resize", "Failed to create new DepthStencilView");
+			return hr;
+		}
+
+		// Recrear la textura para ImGui con las nuevas dimensiones
+		hr = m_imguiTexture.init(m_device,
+			m_window.m_width,
+			m_window.m_height,
+			DXGI_FORMAT_R8G8B8A8_UNORM,
+			D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE,
+			1,
+			0);
+		if (FAILED(hr)) {
+			ERROR("ImGuiTexture", "Resize", "Failed to create new ImGui texture");
+			return hr;
+		}
+
+		// Recrear la vista de render target para la textura de ImGui
+		hr = m_imguiRenderTargetView.init(m_device,
+			m_imguiTexture,
+			D3D11_RTV_DIMENSION_TEXTURE2D,
+			DXGI_FORMAT_R8G8B8A8_UNORM);
+		if (FAILED(hr)) {
+			ERROR("ImGuiRTV", "Resize", "Failed to create new ImGui RenderTargetView");
+			return hr;
+		}
+
+		// Recrear el Shader Resource View para la textura de ImGui
+		hr = m_imguiShaderResourceView.init(m_device,
+			m_imguiTexture,
+			DXGI_FORMAT_R8G8B8A8_UNORM);
+		if (FAILED(hr)) {
+			ERROR("ImGuiSRV", "Resize", "Failed to create new ImGui ShaderResourceView");
 			return hr;
 		}
 

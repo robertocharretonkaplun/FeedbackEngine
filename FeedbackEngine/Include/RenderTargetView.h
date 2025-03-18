@@ -15,6 +15,12 @@ public:
 
   HRESULT
   init(Device& device, Texture &backBuffer, DXGI_FORMAT Format);
+  
+  HRESULT
+  init(Device& device, 
+       Texture& inTex, 
+       D3D11_RTV_DIMENSION ViewDimension, 
+       DXGI_FORMAT Format);
 
   void 
   update();
@@ -24,6 +30,10 @@ public:
          DepthStencilView & depthStencilView, 
          unsigned int numViews, 
          const float ClearColor[4]);
+  
+  void 
+  render(DeviceContext & deviceContext, 
+         unsigned int numViews);
   
   void 
   destroy();
