@@ -421,6 +421,7 @@
     <ClCompile Include="Imgui\imgui-docking-znly-docking\backends\imgui_impl_dx11.cpp" />
     <ClCompile Include="Imgui\imgui-docking-znly-docking\backends\imgui_impl_win32.cpp" />
     <ClCompile Include="Imgui\imgui-docking-znly-docking\imgui.cpp" />
+    <ClCompile Include="Imgui\imgui-docking-znly-docking\ImGuizmo.cpp" />
     <ClCompile Include="Imgui\imgui-docking-znly-docking\imgui_demo.cpp" />
     <ClCompile Include="Imgui\imgui-docking-znly-docking\imgui_draw.cpp" />
     <ClCompile Include="Imgui\imgui-docking-znly-docking\imgui_tables.cpp" />
@@ -449,6 +450,7 @@
     <ClInclude Include="Imgui\imgui-docking-znly-docking\backends\imgui_impl_win32.h" />
     <ClInclude Include="Imgui\imgui-docking-znly-docking\imconfig.h" />
     <ClInclude Include="Imgui\imgui-docking-znly-docking\imgui.h" />
+    <ClInclude Include="Imgui\imgui-docking-znly-docking\ImGuizmo.h" />
     <ClInclude Include="Imgui\imgui-docking-znly-docking\imgui_internal.h" />
     <ClInclude Include="Imgui\imgui-docking-znly-docking\imstb_rectpack.h" />
     <ClInclude Include="Imgui\imgui-docking-znly-docking\imstb_textedit.h" />

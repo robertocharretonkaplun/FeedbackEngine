@@ -1,4 +1,4 @@
-/*
+Ôªø/*
  * MIT License
  *
  * Copyright (c) 2024 Roberto Charreton
@@ -107,6 +107,80 @@ UserInterface::render() {
     ImGui::UpdatePlatformWindows();
     ImGui::RenderPlatformWindowsDefault();
   }
+}
+
+void UserInterface::Renderer(Window& window, ID3D11ShaderResourceView* renderTexture, XMMATRIX& view, XMMATRIX& projection, XMMATRIX& model)
+{
+  bool Stage = true;
+  // 1) Crear/abrir la ventana "Renderer"
+  ImGui::Begin("Renderer",&Stage);
+
+  // 2) Calcular el tama√±o disponible y dibujar la textura como imagen
+  ImVec2 regionSize = ImGui::GetContentRegionAvail();
+  ImTextureID texID = (ImTextureID)renderTexture;
+  ImGui::Image(texID, regionSize);
+
+  // 3) Obtener el rect√°ngulo donde se dibuj√≥ la imagen
+  //    - Este rect√°ngulo lo usaremos para el gizmo
+  ImVec2 imageMin = ImGui::GetItemRectMin();  // esquina superior izquierda
+  ImVec2 imageSize = ImGui::GetItemRectSize();
+
+  // 4) (Opcional) Indicar a ImGuizmo en qu√© draw list dibujar
+  //    - Por defecto, usa el draw list principal. Si no se ve el gizmo,
+  //      o produce fallos, prueba a usar el draw list de la ventana actual:
+  ImGuizmo::SetDrawlist(ImGui::GetWindowDrawList());
+
+  // 5) Configurar el rect√°ngulo del gizmo a la posici√≥n/tama√±o del Image
+  ImGuizmo::SetRect(imageMin.x, imageMin.y, imageSize.x, imageSize.y);
+
+  // 6) Convertir tus matrices (View, Proj, Model) a float[16] en orden fila
+  XMFLOAT4X4 fView, fProj, fModel;
+  XMStoreFloat4x4(&fView, view);
+  XMStoreFloat4x4(&fProj, projection);
+  XMStoreFloat4x4(&fModel, model);
+
+  float viewMat[16] = {
+      fView._11, fView._12, fView._13, fView._14,
+      fView._21, fView._22, fView._23, fView._24,
+      fView._31, fView._32, fView._33, fView._34,
+      fView._41, fView._42, fView._43, fView._44
+  };
+
+  float projMat[16] = {
+      fProj._11, fProj._12, fProj._13, fProj._14,
+      fProj._21, fProj._22, fProj._23, fProj._24,
+      fProj._31, fProj._32, fProj._33, fProj._34,
+      fProj._41, fProj._42, fProj._43, fProj._44
+  };
+
+  float modelMat[16] = {
+      fModel._11, fModel._12, fModel._13, fModel._14,
+      fModel._21, fModel._22, fModel._23, fModel._24,
+      fModel._31, fModel._32, fModel._33, fModel._34,
+      fModel._41, fModel._42, fModel._43, fModel._44
+  };
+
+  // 7) Llamar a Manipulate para, por ejemplo, TRANSLATE en modo LOCAL
+  ImGuizmo::Manipulate(
+    viewMat,
+    projMat,
+    ImGuizmo::TRANSLATE,  // Operaci√≥n: TRANSLATE, ROTATE, SCALE, etc.
+    ImGuizmo::LOCAL,      // Modo: LOCAL o WORLD
+    modelMat
+  );
+
+  // 8) Si se est√° manipulando, actualizar la matriz "model" que nos pasaron
+  if (ImGuizmo::IsUsing())
+  {
+    model = XMMatrixSet(
+      modelMat[0], modelMat[1], modelMat[2], modelMat[3],
+      modelMat[4], modelMat[5], modelMat[6], modelMat[7],
+      modelMat[8], modelMat[9], modelMat[10], modelMat[11],
+      modelMat[12], modelMat[13], modelMat[14], modelMat[15]
+    );
+  }
+
+  ImGui::End(); // Cerrar la ventana "Renderer"
 }
 
 void 
@@ -666,16 +740,16 @@ UserInterface::ToolBar() {
   if (ImGui::BeginMainMenuBar()) {
     if (ImGui::BeginMenu("File")) {
       if (ImGui::MenuItem("New")) {
-        // AcciÛn para "New"
+        // Acci√≥n para "New"
       }
       if (ImGui::MenuItem("Open")) {
-        // AcciÛn para "Open"
+        // Acci√≥n para "Open"
       }
       if (ImGui::MenuItem("Save")) {
-        // AcciÛn para "Save"
+        // Acci√≥n para "Save"
       }
       if (ImGui::MenuItem("Exit")) {
-        // AcciÛn para "Exit"
+        // Acci√≥n para "Exit"
         show_exit_popup = true;
         ImGui::OpenPopup("Exit?");
         //closeApp();
@@ -684,28 +758,28 @@ UserInterface::ToolBar() {
     }
     if (ImGui::BeginMenu("Edit")) {
       if (ImGui::MenuItem("Undo")) {
-        // AcciÛn para "Undo"
+        // Acci√≥n para "Undo"
       }
       if (ImGui::MenuItem("Redo")) {
-        // AcciÛn para "Redo"
+        // Acci√≥n para "Redo"
       }
       if (ImGui::MenuItem("Cut")) {
-        // AcciÛn para "Cut"
+        // Acci√≥n para "Cut"
       }
       if (ImGui::MenuItem("Copy")) {
-        // AcciÛn para "Copy"
+        // Acci√≥n para "Copy"
       }
       if (ImGui::MenuItem("Paste")) {
-        // AcciÛn para "Paste"
+        // Acci√≥n para "Paste"
       }
       ImGui::EndMenu();
     }
     if (ImGui::BeginMenu("Tools")) {
       if (ImGui::MenuItem("Options")) {
-        // AcciÛn para "Options"
+        // Acci√≥n para "Options"
       }
       if (ImGui::MenuItem("Settings")) {
-        // AcciÛn para "Settings"
+        // Acci√≥n para "Settings"
       }
       ImGui::EndMenu();
     }
@@ -728,7 +802,7 @@ UserInterface::closeApp() {
     ImGui::Separator();
 
     if (ImGui::Button("OK", ImVec2(120, 0))) {
-      exit(0); // Salir de la aplicaciÛn
+      exit(0); // Salir de la aplicaci√≥n
       ImGui::CloseCurrentPopup();
     }
     ImGui::SetItemDefaultFocus();
@@ -750,6 +824,6 @@ UserInterface::RenderFullScreenTransparentWindow() {
   ImGuiWindowFlags window_flags = ImGuiWindowFlags_AlwaysAutoResize;
 
   ImGui::Begin("FullScreenTransparentWindow", NULL, window_flags);
-  // Puedes agregar contenido aquÌ si lo necesitas
+  // Puedes agregar contenido aqu√≠ si lo necesitas
   ImGui::End();
 }

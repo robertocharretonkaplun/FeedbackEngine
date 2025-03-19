@@ -224,11 +224,12 @@ BaseApp::init() {
 	return S_OK;
 }
 
-void 
-BaseApp::update() {
+void BaseApp::update() {
+	// Actualizar la interfaz de usuario y la demo (opcional)
 	m_userInterface.update();
 	bool show_demo_window = true;
 	ImGui::ShowDemoWindow(&show_demo_window);
+
 	// Actualizar tiempo y rotación
 	static float t = 0.0f;
 	if (m_swapchain.m_driverType == D3D_DRIVER_TYPE_REFERENCE) {
@@ -241,20 +242,17 @@ BaseApp::update() {
 			dwTimeStart = dwTimeCur;
 		t = (dwTimeCur - dwTimeStart) / 1000.0f;
 	}
-
 	updateTranslationByKey(t);
+	//rotation.y = t;
 
-	rotation.y = t;
-	// Actualizar la rotación del objeto y el color
-	XMMATRIX scaleMatrix = XMMatrixScaling(scale.x, scale.y , scale.z );
+	// Calcular la transformación del cubo
+	XMMATRIX scaleMatrix = XMMatrixScaling(scale.x, scale.y, scale.z);
 	XMMATRIX rotationMatrix = XMMatrixRotationRollPitchYaw(rotation.x, rotation.y, rotation.z);
-	XMMATRIX traslationMatrix = XMMatrixTranslation(position.x, position.y, position.z);
+	XMMATRIX translationMatrix = XMMatrixTranslation(position.x, position.y, position.z);
+	m_modelMatrix = scaleMatrix * rotationMatrix * translationMatrix;
 
-	// Componer la matriz final en el orden: scale -> rotation -> translation
-	m_modelMatrix = scaleMatrix * rotationMatrix * traslationMatrix;
-	// Actualizar el buffer constante del frame
+	// Actualizar buffer constante del modelo
 	cb.mWorld = XMMatrixTranspose(m_modelMatrix);
-
 	m_vMeshColor = XMFLOAT4(
 		(sinf(t * 1.0f) + 1.0f) * 0.5f,
 		(cosf(t * 3.0f) + 1.0f) * 0.5f,
@@ -264,16 +262,20 @@ BaseApp::update() {
 	cb.vMeshColor = m_vMeshColor;
 	m_changeEveryFrame.update(m_deviceContext, 0, nullptr, &cb, 0, 0);
 
-	// Actualizar la matriz de proyección
-	// Matriz de proyección con FOV similar a Unreal (90°)
+	// Actualizar la matriz de proyección y la cámara
 	float FOV = XMConvertToRadians(90.0f);
 	m_Projection = XMMatrixPerspectiveFovLH(FOV, m_window.m_width / (float)m_window.m_height, 0.01f, 10000.0f);
-
 	updateCamera();
-	// Actualizar la proyección en el buffer constante
 	cbChangesOnResize.mProjection = XMMatrixTranspose(m_Projection);
 	m_changeOnResize.update(m_deviceContext, 0, nullptr, &cbChangesOnResize, 0, 0);
+
+	
+	
+		cb.mWorld = XMMatrixTranspose(m_modelMatrix);
+		m_changeEveryFrame.update(m_deviceContext, 0, nullptr, &cb, 0, 0);
+	// -------------------------------------
 }
+
 
 void 
 BaseApp::render() {
@@ -327,7 +329,14 @@ BaseApp::render() {
 		DXGI_FORMAT_R8G8B8A8_UNORM);    // Formato
 
 	// Renderizar la interfaz de usuario y mostrar la imagen
-	m_userInterface.Renderer(m_window, m_imguiShaderResourceView.m_textureFromImg);
+	//m_userInterface.Renderer(m_window, m_imguiShaderResourceView.m_textureFromImg);
+	m_userInterface.Renderer(
+		m_window,
+		m_imguiShaderResourceView.m_textureFromImg,
+		m_View,
+		m_Projection,
+		m_modelMatrix
+	);
 	m_userInterface.render();
 
 	// Presentar el frame en pantalla

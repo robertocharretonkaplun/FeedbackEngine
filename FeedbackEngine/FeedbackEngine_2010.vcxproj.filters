@@ -108,6 +108,9 @@
     <ClInclude Include="Include\Screenshot.h">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="Imgui\imgui-docking-znly-docking\ImGuizmo.h">
+      <Filter>imgui\source</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FeedbackEngine.cpp" />
@@ -176,6 +179,9 @@
     </ClCompile>
     <ClCompile Include="Source\Screenshot.cpp">
       <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Imgui\imgui-docking-znly-docking\ImGuizmo.cpp">
+      <Filter>imgui\source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

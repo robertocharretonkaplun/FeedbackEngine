@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2024 Roberto Charreton
+ * Copyright (c) 2025 Roberto Charreton
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -32,6 +32,7 @@
 #include <imgui_internal.h>
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
+#include "ImGuizmo.h"
 
 class Window;
 class SwapChain;
@@ -53,6 +54,15 @@ public:
   void 
   render();
   
+  void 
+  Renderer(
+    Window& window,
+    ID3D11ShaderResourceView* renderTexture,
+    XMMATRIX& view,        // Matriz de vista usada para dibujar esa textura
+    XMMATRIX& projection,  // Matriz de proyección usada para dibujar esa textura
+    XMMATRIX& model        // Matriz de tu objeto (cubo) que deseas manipular
+  );
+
   void 
   destroy();
 

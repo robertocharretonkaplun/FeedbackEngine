@@ -92,6 +92,8 @@ public:
 	CBNeverChanges cbNeverChanges;
 	CBChangeOnResize cbChangesOnResize;
 
+	bool m_usingGizmo;
+
 	bool keys[256] = { false };
 	bool mouseLeftDown = false; // Estado del botón izquierdo
 	int lastX;
