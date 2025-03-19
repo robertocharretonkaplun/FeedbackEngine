@@ -282,7 +282,6 @@ BaseApp::render() {
 
 	// Configurar la textura IMGUI como la vista de renderizado
 	m_imguiRenderTargetView.render(m_deviceContext, 1);
-
 	// Set Render Target View
 	m_renderTargetView.render(m_deviceContext, m_depthStencilView, 1, ClearColor);
 
