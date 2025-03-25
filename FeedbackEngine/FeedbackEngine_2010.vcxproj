@@ -437,6 +437,7 @@
     <ClCompile Include="Source\Device.cpp" />
     <ClCompile Include="Source\DeviceContext.cpp" />
     <ClCompile Include="Source\InputLayout.cpp" />
+    <ClCompile Include="Source\ModelLoader.cpp" />
     <ClCompile Include="Source\RenderTargetView.cpp" />
     <ClCompile Include="Source\SamplerState.cpp" />
     <ClCompile Include="Source\Screenshot.cpp" />

@@ -180,6 +180,9 @@
     <ClCompile Include="Source\Screenshot.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ModelLoader.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="FeedbackEngine.fx">
