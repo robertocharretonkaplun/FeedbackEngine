@@ -108,6 +108,9 @@
     <ClInclude Include="Include\Screenshot.h">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="Include\ModelLoader.h">
+      <Filter>Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FeedbackEngine.cpp" />

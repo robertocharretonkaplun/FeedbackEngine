@@ -74,6 +74,9 @@ BaseApp::init() {
 	if (FAILED(hr))
 		return hr;
 
+	// Load Model
+	//m_model.loadModel("Models/Vala2.fbx");
+
 	// Create vertex buffer
 	SimpleVertex
 		vertices[] = {
