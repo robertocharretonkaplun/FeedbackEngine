@@ -15,6 +15,12 @@
 #include "Resource.h"
 #include "resource.h"
 
+// Third Parties
+#include "Utilities\Memory\TSharedPointer.h"
+#include "Utilities\Memory\TWeakPointer.h"
+#include "Utilities\Memory\TStaticPtr.h"
+#include "Utilities\Memory\TUniquePtr.h"
+
 // MACROS
 #define SAFE_RELEASE(x) if(x != nullptr) x->Release(); x = nullptr;
 
