@@ -75,6 +75,7 @@ BaseApp::init() {
 		return hr;
 
 	// Load Model
+	m_Vela.LoadFBXModel("Models/Vela2.fbx");
 	//m_model.loadModel("Models/Vala2.fbx");
 
 	// Create vertex buffer

@@ -9,6 +9,9 @@ public:
 	ModelLoader() = default;
 	~ModelLoader() = default;
 
+	bool
+	InitializeFBXManager();
+
 	bool 
 	LoadFBXModel(const std::string & filePath);
 

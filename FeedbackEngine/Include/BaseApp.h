@@ -13,6 +13,7 @@
 #include "MeshComponent.h"
 #include "SamplerState.h"
 #include "UserInterface.h"
+#include "ModelLoader.h"
 
 class 
 BaseApp {
@@ -87,6 +88,8 @@ public:
 
 	MeshComponent m_meshComponent;
 	Camera m_camera;
+
+	ModelLoader													m_Vela;
 
 	CBChangesEveryFrame cb;
 	CBNeverChanges cbNeverChanges;
