@@ -77,6 +77,10 @@ enum ShaderType {
   PIXEL_SHADER = 1
 };
 
+/**
+ * @enum ComponentType
+ * @brief Tipos de componentes disponibles en el juego.
+ */
 enum 
 ComponentType {
   NONE = 0,     ///< Tipo de componente no especificado.

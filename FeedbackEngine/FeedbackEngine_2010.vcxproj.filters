@@ -45,6 +45,9 @@
     <Filter Include="Include\Utilities\Vectors">
       <UniqueIdentifier>{e8b0b712-b9d5-458a-aff1-2c500efcfd59}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\ECS">
+      <UniqueIdentifier>{052af5a6-f465-4385-8ca4-69595ede5988}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Prerequisites.h">
@@ -180,6 +183,12 @@
     <ClInclude Include="Include\ECS\Component.h">
       <Filter>Include\ECS</Filter>
     </ClInclude>
+    <ClInclude Include="Include\ECS\Actor.h">
+      <Filter>Include\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ECS\Transform.h">
+      <Filter>Include\ECS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FeedbackEngine.cpp" />
@@ -251,6 +260,12 @@
     </ClCompile>
     <ClCompile Include="Source\ModelLoader.cpp">
       <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ECS\Actor.cpp">
+      <Filter>Source\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ECS\Transform.cpp">
+      <Filter>Source\ECS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

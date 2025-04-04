@@ -118,6 +118,16 @@ EngineUtilities {
       return Vector3(x / mag, y / mag, z / mag);
     }
 
+    void
+    zero() {
+      Vector3(0, 0, 0);
+    }
+    
+    void
+    one() {
+      Vector3(1,1,1);
+    }
+
     // Método para obtener un puntero a los datos como un arreglo
     // @return: Puntero a los componentes del vector
     float* 

@@ -35,7 +35,7 @@ public:
   template <typename T>
   void addComponent(EngineUtilities::TSharedPointer<T> component) {
     static_assert(std::is_base_of<Component, T>::value, "T must be derived from Component");
-    components.push_back(component.template dynamic_pointer_cast<Component>());
+    m_components.push_back(component.template dynamic_pointer_cast<Component>());
   }
 
   /**
@@ -46,7 +46,7 @@ public:
   template<typename T>
   EngineUtilities::TSharedPointer<T>
     getComponent() {
-    for (auto& component : components) {
+    for (auto& component : m_components) {
       EngineUtilities::TSharedPointer<T> specificComponent = component.template dynamic_pointer_cast<T>();
       if (specificComponent) {
         return specificComponent;

@@ -14,7 +14,7 @@
 #include "SamplerState.h"
 #include "UserInterface.h"
 #include "ModelLoader.h"
-
+#include "ECS\Actor.h"
 class 
 BaseApp {
 public:
@@ -63,13 +63,9 @@ public:
 	DepthStencilView										m_depthStencilView;
 	Viewport														m_viewport;
 	ShaderProgram												m_shaderProgram;
-	Buffer															m_vertexBuffer;
-	Buffer															m_indexBuffer;
 	Buffer															m_neverChanges;
 	Buffer															m_changeOnResize;
 	Buffer															m_changeEveryFrame;
-	Texture															m_textureCubeImg;
-	SamplerState												m_samplerState;
 	UserInterface												m_userInterface;
 
 	// Render Target IMGUI
@@ -77,21 +73,18 @@ public:
 	RenderTargetView										m_imguiRenderTargetView;
 	Texture															m_imguiShaderResourceView;
 
-	XMMATRIX                            m_modelMatrix;
 	XMMATRIX                            m_View;
 	XMMATRIX                            m_Projection;
 	XMFLOAT4                            m_vMeshColor;
 
-	XMFLOAT3 position;  // Posición del objeto
-	XMFLOAT3 rotation;  // Rotación del objeto
-	XMFLOAT3 scale;     // Escala del objeto
-
-	MeshComponent m_meshComponent;
 	Camera m_camera;
 
+	// Vela Actor
 	ModelLoader													m_Vela;
+	EngineUtilities::TSharedPointer<Actor> AVela;
+	std::vector<Texture>								m_velaTextures;
+	Texture m_default;
 
-	CBChangesEveryFrame cb;
 	CBNeverChanges cbNeverChanges;
 	CBChangeOnResize cbChangesOnResize;
 
