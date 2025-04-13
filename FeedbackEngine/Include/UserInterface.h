@@ -36,6 +36,7 @@
 class Window;
 class SwapChain;
 class Texture;
+class Actor;
 //class Model;
 
 class 
@@ -71,8 +72,11 @@ public:
   //void
   //Inspector(std::vector<Model> & models, int index);
 
+  void
+  inspectorGeneral(EngineUtilities::TSharedPointer<Actor> actor);
+
   void 
-  inspectorContainer();
+  inspectorContainer(EngineUtilities::TSharedPointer<Actor> actor);
 
   void
   output();

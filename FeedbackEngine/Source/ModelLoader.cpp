@@ -33,7 +33,7 @@ ModelLoader::LoadFBXModel(const std::string& filePath) {
 			ERROR("ModelLoader", "LoadFBXModel", "Unable to initialize FBX importer for file: " << filePath.c_str());
 			ERROR("ModelLoader", "LoadFBXModel", "Error returned: " << lImporter->GetStatus().GetErrorString());
 			return false;
-		}
+		}		
 
 		// 03. Import the scene
 		if (!lImporter->Import(lScene)) {
@@ -42,6 +42,7 @@ ModelLoader::LoadFBXModel(const std::string& filePath) {
 			return false;
 		}
 
+		modelName = lImporter->GetFileName();
 		// 04. Destroy the importer
 		lImporter->Destroy();
 		MESSAGE("ModelLoader", "LoadFBXModel", "Successfully imported the FBX scene from file: " << filePath.c_str());

@@ -112,6 +112,11 @@ public:
   getName() { 
     return m_name; 
   }
+  
+  void
+  setName(std::string name) { 
+    m_name = name; 
+  }
 
   /**
    * @brief Obtiene un componente específico del actor.

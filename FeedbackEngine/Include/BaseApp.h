@@ -85,6 +85,9 @@ public:
 	std::vector<Texture>								m_velaTextures;
 	Texture m_default;
 
+	// Actors
+	std::vector< EngineUtilities::TSharedPointer<Actor>> m_actors;
+
 	CBNeverChanges cbNeverChanges;
 	CBChangeOnResize cbChangesOnResize;
 

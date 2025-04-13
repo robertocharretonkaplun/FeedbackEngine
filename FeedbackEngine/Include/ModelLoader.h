@@ -32,5 +32,6 @@ private:
 	FbxScene* lScene;
 	std::vector<std::string> textureFileNames;
 public:
+	std::string modelName;
 	std::vector<MeshComponent> meshes;
 };

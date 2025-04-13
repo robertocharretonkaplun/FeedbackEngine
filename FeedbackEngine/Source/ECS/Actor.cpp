@@ -65,13 +65,14 @@ Actor::render(DeviceContext& deviceContext) {
 				m_textures[i].render(deviceContext, 0, 1);
 			}
 			else {
+				//m_textures[0].render(deviceContext, 0, 1);
 				//std::string msg = std::to_string(i) + " NO tiene textura asignada.";
 				//MESSAGE("Actor", "render", msg.c_str());
 				// Aquí puedes asignar una textura por defecto o manejar el caso de forma adecuada.
 			}
 		}
 
-		m_modelBuffer.render(deviceContext, 2, 1);
+		m_modelBuffer.render(deviceContext, 2, 1, true);
 
 		deviceContext.IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 		deviceContext.DrawIndexed(m_meshes[i].m_numIndex, 0, 0);

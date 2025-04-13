@@ -1,6 +1,6 @@
 #include "BaseApp.h"
 
-HRESULT 
+HRESULT
 BaseApp::init() {
 	HRESULT hr = S_OK;
 
@@ -72,7 +72,7 @@ BaseApp::init() {
 
 	if (FAILED(hr))
 		return hr;
-	
+
 	// Create the constant buffers
 	hr = m_neverChanges.init(m_device, sizeof(CBNeverChanges));
 	if (FAILED(hr))
@@ -82,24 +82,24 @@ BaseApp::init() {
 	if (FAILED(hr))
 		return hr;
 
-	hr = m_imguiTexture.init(m_device, 
-													 m_window.m_width,
-													 m_window.m_height,
-													 DXGI_FORMAT_R8G8B8A8_UNORM,
-													 D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE,
-													 1,
-													 0);
+	hr = m_imguiTexture.init(m_device,
+		m_window.m_width,
+		m_window.m_height,
+		DXGI_FORMAT_R8G8B8A8_UNORM,
+		D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE,
+		1,
+		0);
 
 	if (FAILED(hr)) {
 		return hr;
 	}
-	
+
 
 	// Crear una vista de render target para la textura de IMGUI
 	hr = m_imguiRenderTargetView.init(m_device,
-																		m_imguiTexture,
-																		D3D11_RTV_DIMENSION_TEXTURE2D, //D3D11_RTV_DIMENSION_TEXTURE2DMS
-																		DXGI_FORMAT_R8G8B8A8_UNORM);
+		m_imguiTexture,
+		D3D11_RTV_DIMENSION_TEXTURE2D, //D3D11_RTV_DIMENSION_TEXTURE2DMS
+		DXGI_FORMAT_R8G8B8A8_UNORM);
 
 	if (FAILED(hr)) {
 		return hr;
@@ -121,64 +121,70 @@ BaseApp::init() {
 		m_device.m_device,
 		m_deviceContext.m_deviceContext);
 
-
-	// Set Vela Actor
-	// Load the Texture
-	Texture Vela_Char_BaseColor;
-	Vela_Char_BaseColor.init(m_device,
-		"Textures/Vela/Vela_Char_BaseColor.png",
-		ExtensionType::PNG);
-
-	Texture Vela_Corneas_BaseColor;
-	Vela_Corneas_BaseColor.init(m_device,
-		"Textures/Vela/Vela_Corneas_BaseColor.png",
-		ExtensionType::PNG);
-
-	Texture Vela_Gun_BaseColor;
-	Vela_Gun_BaseColor.init(m_device,
-		"Textures/Vela/Vela_Gun_BaseColor.png",
-		ExtensionType::PNG);
-
-	Texture Vela_Legs_BaseColor;
-	Vela_Legs_BaseColor.init(m_device,
-		"Textures/Vela/Vela_Legs_BaseColor.png",
-		ExtensionType::PNG);
-
-	Texture Vela_Mechanical_BaseColor;
-	Vela_Mechanical_BaseColor.init(m_device,
-		"Textures/Vela/Vela_Mechanical_BaseColor.png",
-		ExtensionType::PNG);
-
-	Texture Vela_Plate_BaseColor;
-	Vela_Plate_BaseColor.init(m_device,
-		"Textures/Vela/Vela_Plate_BaseColor.png",
-		ExtensionType::PNG);
-
-	Texture Vela_Visor_BaseColor;
-	Vela_Visor_BaseColor.init(m_device,
-		"Textures/Vela/Vela_Visor_BaseColor.png",
-		ExtensionType::PNG);
-	
 	m_default.init(m_device, "Textures/Default.png", ExtensionType::PNG);
 
-	m_velaTextures.push_back(Vela_Corneas_BaseColor);			// 1 
-	m_velaTextures.push_back(Vela_Gun_BaseColor);					// 2
-	m_velaTextures.push_back(Vela_Visor_BaseColor);				// 3
-	m_velaTextures.push_back(Vela_Legs_BaseColor);				// 4
-	m_velaTextures.push_back(Vela_Mechanical_BaseColor);	// 5
-	m_velaTextures.push_back(Vela_Char_BaseColor);				// 6
-	m_velaTextures.push_back(Vela_Plate_BaseColor);				// 7
-	m_velaTextures.push_back(m_default);				// 7
-	// Load Model
-	m_Vela.LoadFBXModel("Models/Vela2.fbx");
+	// Set Vela Actor
 	AVela = EngineUtilities::MakeShared<Actor>(m_device);
 	if (!AVela.isNull()) {
 		// Init Actor Transform
-		AVela->getComponent<Transform>()->setTransform(EngineUtilities::Vector3(-0.9f, -2.0f, 2.0f), 
-																									 EngineUtilities::Vector3(XM_PI / -2.0f, 0.0f, XM_PI / 2.0f),
-																									 EngineUtilities::Vector3(0.03f, 0.03f, 0.03f));
+		AVela->getComponent<Transform>()->setTransform(EngineUtilities::Vector3(-0.9f, -2.0f, 2.0f),
+			EngineUtilities::Vector3(XM_PI / -2.0f, 0.0f, XM_PI / 2.0f),
+			EngineUtilities::Vector3(0.03f, 0.03f, 0.03f));
+
+		// Load Model
+		m_Vela.LoadFBXModel("Models/Vela2.fbx");
+		
 		// Init Actor Mesh
 		AVela->setMesh(m_device, m_Vela.meshes);
+
+		// Set Actor Name
+		AVela->setName(m_Vela.modelName);
+
+		// Load the Texture
+		Texture Vela_Char_BaseColor;
+		Vela_Char_BaseColor.init(m_device,
+			"Textures/Vela/Vela_Char_BaseColor.png",
+			ExtensionType::PNG);
+
+		Texture Vela_Corneas_BaseColor;
+		Vela_Corneas_BaseColor.init(m_device,
+			"Textures/Vela/Vela_Corneas_BaseColor.png",
+			ExtensionType::PNG);
+
+		Texture Vela_Gun_BaseColor;
+		Vela_Gun_BaseColor.init(m_device,
+			"Textures/Vela/Vela_Gun_BaseColor.png",
+			ExtensionType::PNG);
+
+		Texture Vela_Legs_BaseColor;
+		Vela_Legs_BaseColor.init(m_device,
+			"Textures/Vela/Vela_Legs_BaseColor.png",
+			ExtensionType::PNG);
+
+		Texture Vela_Mechanical_BaseColor;
+		Vela_Mechanical_BaseColor.init(m_device,
+			"Textures/Vela/Vela_Mechanical_BaseColor.png",
+			ExtensionType::PNG);
+
+		Texture Vela_Plate_BaseColor;
+		Vela_Plate_BaseColor.init(m_device,
+			"Textures/Vela/Vela_Plate_BaseColor.png",
+			ExtensionType::PNG);
+
+		Texture Vela_Visor_BaseColor;
+		Vela_Visor_BaseColor.init(m_device,
+			"Textures/Vela/Vela_Visor_BaseColor.png",
+			ExtensionType::PNG);
+
+		m_velaTextures.push_back(Vela_Corneas_BaseColor);			// 1 
+		m_velaTextures.push_back(Vela_Gun_BaseColor);					// 2
+		m_velaTextures.push_back(Vela_Visor_BaseColor);				// 3
+		m_velaTextures.push_back(Vela_Legs_BaseColor);				// 4
+		m_velaTextures.push_back(Vela_Mechanical_BaseColor);	// 5
+		m_velaTextures.push_back(Vela_Char_BaseColor);				// 6
+		m_velaTextures.push_back(Vela_Plate_BaseColor);				// 7
+		m_velaTextures.push_back(m_default);									// 0
+
 		// Init Actor Textures
 		AVela->setTextures(m_velaTextures);
 
@@ -189,11 +195,10 @@ BaseApp::init() {
 		MESSAGE("Actor", "Actor", "Actor resource not found.");
 	}
 
-
 	return S_OK;
 }
 
-void 
+void
 BaseApp::update() {
 	m_userInterface.update();
 	bool show_demo_window = true;
@@ -226,20 +231,15 @@ BaseApp::update() {
 	// Actualizar info logica del mesh
 	AVela->update(0, m_deviceContext);
 
-	ImGui::Begin("Transform");
 
-	// Draw the structure
-	m_userInterface.vec3Control("Position", const_cast<float*>(AVela->getComponent<Transform>()->getPosition().data()));
-	m_userInterface.vec3Control("Rotation", const_cast<float*>(AVela->getComponent<Transform>()->getRotation().data()));
-	m_userInterface.vec3Control("Scale", const_cast<float*>(AVela->getComponent<Transform>()->getScale().data()));
 
-	ImGui::End();
+	m_userInterface.inspectorGeneral(AVela);
 }
 
-void 
+void
 BaseApp::render() {
 	// Limpiar los buffers
-	const float ClearColor[4] = { 0.0f, 0.125f, 0.3f, 1.0f }; // red, green, blue, alpha
+	const float ClearColor[4] = { 0.85f, 0.85f, 0.85f, 1.0f }; // red, green, blue, alpha
 
 	// Configurar la textura IMGUI como la vista de renderizado
 	m_imguiRenderTargetView.render(m_deviceContext, 1);
@@ -284,7 +284,7 @@ BaseApp::render() {
 	m_swapchain.present();
 }
 
-void 
+void
 BaseApp::destroy() {
 	if (m_deviceContext.m_deviceContext) m_deviceContext.m_deviceContext->ClearState();
 
@@ -304,7 +304,7 @@ BaseApp::destroy() {
 	m_device.destroy();
 }
 
-HRESULT 
+HRESULT
 BaseApp::resizeWindow(HWND hWnd, LPARAM lParam) {
 	if (m_swapchain.m_swapchain) {
 		unsigned int newWidth = LOWORD(lParam);
@@ -328,10 +328,10 @@ BaseApp::resizeWindow(HWND hWnd, LPARAM lParam) {
 
 		// Redimensionar el swap chain
 		HRESULT hr = m_swapchain.m_swapchain->ResizeBuffers(0,
-																												m_window.m_width,
-																												m_window.m_height,
-																												DXGI_FORMAT_R8G8B8A8_UNORM,
-																												0);
+			m_window.m_width,
+			m_window.m_height,
+			DXGI_FORMAT_R8G8B8A8_UNORM,
+			0);
 		if (FAILED(hr)) {
 			// Si falla, puede ser útil obtener la razón del dispositivo removido, por ejemplo:
 			if (hr == DXGI_ERROR_DEVICE_REMOVED) {
@@ -430,7 +430,7 @@ BaseApp::resizeWindow(HWND hWnd, LPARAM lParam) {
 	}
 }
 
-void 
+void
 BaseApp::updateTranslationByKey(float deltaTime) {
 	float moveSpeed = 0.001f; // Velocidad de movimiento
 	float moveSpeedCamera = 0.01f; // Velocidad de movimiento
@@ -455,7 +455,7 @@ BaseApp::updateTranslationByKey(float deltaTime) {
 
 }
 
-void 
+void
 BaseApp::updateCamera() {
 	// Convertir la dirección a vectores normalizados
 	XMVECTOR pos = XMLoadFloat3(&m_camera.position);
@@ -470,7 +470,7 @@ BaseApp::updateCamera() {
 	m_neverChanges.update(m_deviceContext, 0, nullptr, &cbNeverChanges, 0, 0);
 }
 
-void 
+void
 BaseApp::rotateCamera(int mouseX, int mouseY) {
 	float offsetX = (mouseX - lastX) * sensitivity;
 	float offsetY = (mouseY - lastY) * sensitivity;
@@ -498,12 +498,12 @@ BaseApp::rotateCamera(int mouseX, int mouseY) {
 	XMStoreFloat3(&m_camera.right, XMVector3Normalize(right));
 }
 
-int 
-BaseApp::run(HINSTANCE hInstance, 
-						 HINSTANCE hPrevInstance, 
-						 LPWSTR lpCmdLine, 
-						 int nCmdShow, 
-						 WNDPROC wndproc) {
+int
+BaseApp::run(HINSTANCE hInstance,
+	HINSTANCE hPrevInstance,
+	LPWSTR lpCmdLine,
+	int nCmdShow,
+	WNDPROC wndproc) {
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
