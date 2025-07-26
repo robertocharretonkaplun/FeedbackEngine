@@ -105,7 +105,8 @@ BaseApp::init() {
 		return hr;
 	}
 
-	hr = m_imguiShaderResourceView.init(m_device, m_imguiTexture, DXGI_FORMAT_R8G8B8A8_UNORM);
+	hr = m_imguiShaderResourceView.init(m_device, m_imguiTexture, 
+																			DXGI_FORMAT_R8G8B8A8_UNORM);
 	if (FAILED(hr)) {
 		return hr;
 	}

@@ -189,6 +189,9 @@
     <ClInclude Include="Include\ECS\Transform.h">
       <Filter>Include\ECS</Filter>
     </ClInclude>
+    <ClInclude Include="Include\OBJ_Loader.h">
+      <Filter>Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FeedbackEngine.cpp" />

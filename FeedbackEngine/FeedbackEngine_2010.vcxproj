@@ -474,6 +474,7 @@
     <ClInclude Include="Include\InputLayout.h" />
     <ClInclude Include="Include\MeshComponent.h" />
     <ClInclude Include="Include\ModelLoader.h" />
+    <ClInclude Include="Include\OBJ_Loader.h" />
     <ClInclude Include="Include\Prerequisites.h" />
     <ClInclude Include="Include\RenderTargetView.h" />
     <ClInclude Include="Include\SamplerState.h" />
